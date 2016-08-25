@@ -4,15 +4,15 @@
 # Contributor: Jakub Schmidtke <sjakub-at-gmail-dot-com>
 # Contributor: mosra <mosra@centrum.cz>
 
-pkgname=kdevelop-git
-pkgver=4.90.92.r23405.a0670c7
+pkgname=kdevelop
+pkgver=5.0.0
 pkgrel=1
 pkgdesc="A C/C++ development environment for KDE. (GIT Version)"
 arch=('i686' 'x86_64')
 url='http://www.kdevelop.org'
 license=('GPL')
 depends=('qt5-tools'
-         'kdevplatform-git'
+         'kdevplatform'
          'krunner'
          'hicolor-icon-theme'
          )
@@ -35,18 +35,15 @@ makedepends=('extra-cmake-modules'
              'okteta'
              'krunner'
              'plasma-framework'
-             'kdevelop-pg-qt-git'
+             'kdevelop-pg-qt'
              'clang')
-conflicts=('kdevelop')
-provides=('kdevelop')
-source=('git://anongit.kde.org/kdevelop.git')
+source=("git://anongit.kde.org/kdevelop.git#tag=v${pkgver}")
 sha1sums=('SKIP')
-install=kdevelop-git.install
+install=kdevelop.install
 
 pkgver() {
-  cd kdevelop
-  _ver="$(cat CMakeLists.txt | grep -m3 -e KDEVELOP_VERSION_MAJOR -e KDEVELOP_VERSION_MINOR -e KDEVELOP_VERSION_PATCH | grep -o "[[:digit:]]*" | paste -sd'.')"
-  echo "${_ver}.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+  cd "${srcdir}/${pkgname}"
+  git describe --tags `git rev-list --tags --max-count=1` | sed 's/v//g'
 }
 
 prepare() {
