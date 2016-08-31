@@ -7,7 +7,7 @@
 pkgname=kdevelop
 pkgver=5.0.0
 pkgrel=1
-pkgdesc="A C/C++ development environment for KDE. (GIT Version)"
+pkgdesc="A C/C++ development environment for KDE."
 arch=('i686' 'x86_64')
 url='http://www.kdevelop.org'
 license=('GPL')
